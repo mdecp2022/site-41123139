@@ -141,28 +141,35 @@ img.add_border {
           </div>
           
         </header>
-    <div id="tipue_search_content">w13 << <a href='w13.html'>Previous</a> <a href='w12-1.html'>Next</a> >> w12-1<br /><h1>w12</h1>
-<p><a href="https://mdecp2022.github.io/site-41123139/content/Brython.html?src=https://gist.githubusercontent.com/INbunB/c773d6db6030bd09f10ac0a98cf92c9c/raw/937aec1b422451b6b2a420e67c0642d0b9f71eae/w12_hw-1.py">hw 第一個練習</a></p>
-<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false"># Brython 的 input() 可以接受輸入提示字串, 跳出瀏覽器輸入表單後, 將輸入內容以字串取回
-user_input_temp = input("請輸入攝氏溫度值:")
-# 接著列出 user_input_temp 變數的資料型別
-print(type(user_input_temp))</pre>
-<p><a href="https://mdecp2022.github.io/site-41123139/content/Brython.html?src=https://gist.githubusercontent.com/INbunB/c773d6db6030bd09f10ac0a98cf92c9c/raw/9ca73ce260ed1956b2f16676d2816598096cf2f7/w12_hw-2.py">hw 第二個練習</a></p>
-<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false"># Brython 的 input() 可以接受輸入提示字串, 跳出瀏覽器輸入表單後, 將輸入內容以字串取回
-user_input_temp = input("請輸入攝氏溫度值:")
-# 接著列出 user_input_temp 變數的資料型別
-print(type(user_input_temp))
-# 到這裡已知利用 input() 函式將傳回字串, 接著以 float() 將字串轉為浮點數
-user_input_temp = float(user_input_temp)
-# 因為攝氏溫度乘上 9/5 之後再加上 32 就可以得到對應的華氏溫度值
-Fahrenheit = (user_input_temp*9/5) + 32
-# 到這裡, Fahrenheit 資料型別為浮點數, 而 user_input_temp 在第 8 行也轉為浮點數
-# 要將兩個浮點數與字串相加, 都必須透過 str() 轉為字串
-print("攝氏 " + str(user_input_temp) + " 度, 等於華氏 " + str(Fahrenheit) + " 度.")</pre>
-<p></p>
-<p><br/><br/></p>
-<p></p>
-<br />w13 << <a href='w13.html'>Previous</a> <a href='w12-1.html'>Next</a> >> w12-1</div>
+    <div id="tipue_search_content">HW << <a href='HW.html'>Previous</a> <a href='w13.html'>Next</a> >> w13<br /><h1>w6</h1>
+<p><a href="https://mdecp2022.github.io/site-41123139/content/Brython.html?src=https://gist.githubusercontent.com/INbunB/eefcc6cfd6b9a27d76784b11170a3cc0/raw/d893bad9de7cb6d5d13851f66d51dfaa48153b5b/hw">hw</a> (點擊連結可抽點1a學號)</p>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false"># Python 的註解分為單行註解與多行, 單行註解可在字串前方放入 #
+'''多行註解則可以透過三個單引號前後標註字串或文字段落內容, 
+也可以使用三個雙引號作為多行註解的標註
+'''
+# 使用 import 導入 random 模組, 隨後就可以直接引用 random 模組的方法
+import random
+cp1b = "0761"
+# 宣告 url 變數值為字串, 此字串為取得 cp2022 1a 選課成員名單
+url = "https://nfu.cycu.org/?semester=1111&amp;courseno=" + cp1b + "&amp;column=True"
+# 利用上述已經宣告的 url 變數字串值, 作為 open() 函式的輸入變數, 可以連結至該網站
+# 連接 url 所代表字串的網站後, 再利用 read() 函式讀取該網站的內容, 即可取得 cp2022 1a 的選課成員學號
+# url 所屬的網站, 乃 69 中的一台虛擬主機 8/10ff-0-1-2, 並利用 Get 從教務主機取回課程註冊成員學號
+# 由於所取回的學號以跳行符號隔開, 因此取回的學號資料行, 再利用 split() 函式, 以 \n 跳行符號分割後
+# 所對應到 data 的資料型別將會是數列
+data = open(url).read().split("\n")
+# 經過檢查 data 數列, 發現最後一個 element 為空字串, 因此利用 [:-1] 去掉數列的最後一個元素, -1 代表數列最後一個元素的索引
+#print(data[:-1])
+# 設定一個變數, 與修課成員學號數列對應
+stud = data[:-1]
+# 使用 random 模組中的 shuffle() 函式, 以隨機的方式排列 stud 數列內容
+random.shuffle(stud)
+# 設定 num 與 5 對應, 或將 5 整數值存入 num 變數所對應的記憶體位址
+num = 5
+# 利用 for 重複迴圈與 range() 變數, 列印出 (利用 print() 函式) 已經隨機排列次序的 stud 數列的最前面 num 個學號值
+for i in range(num):
+    print(stud[i])</pre>
+<p></p><br />HW << <a href='HW.html'>Previous</a> <a href='w13.html'>Next</a> >> w13</div>
         
     <!-- footer -->
       <div class="container">
