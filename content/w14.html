@@ -142,7 +142,20 @@ img.add_border {
           
         </header>
     <div id="tipue_search_content">w13 << <a href='w13.html'>Previous</a> <a href='cp2022.html'>Next</a> >> cp2022<br /><h1>w14</h1>
-<p></p>
+<!-- 
+在動態網站頁面中啟用 Brython 執行環境的用法, 請注意動態網站執行所在路徑
+-->
+<script src="./../cmsimde/static/brython.js"></script>
+<script src="./../cmsimde/static/brython_stdlib.js"></script>
+<!-- 啟動 Brython -->
+<p>
+<script>
+window.onload=function(){
+brython({debug:1, pythonpath:['./../cmsimde/static/','/downloads/py/']});
+}
+</script>
+</p>
+<p><button id="btn1">取使用者輸入</button></p>
 <div id="brython_div"></div>
 <p>
 <script type="text/python">
@@ -165,9 +178,9 @@ def get_input(env):
 # 透過 Brython browser 模組中的 document 物件將 id="btn1" 的物件中的 bind() 方法
 # 讓使用者 click 後會經由瀏覽器中的 event 通知執行 get_input 函式
 document["btn1"].bind('click', get_input)
-</script>
 </p>
-<p></p><br />w13 << <a href='w13.html'>Previous</a> <a href='cp2022.html'>Next</a> >> cp2022</div>
+</script>
+</p><br />w13 << <a href='w13.html'>Previous</a> <a href='cp2022.html'>Next</a> >> cp2022</div>
         
     <!-- footer -->
       <div class="container">
