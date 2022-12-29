@@ -1,6 +1,41 @@
 <h1>About</h1>
 <p>cmsite: wcms use <a href="https://github.com/mdecycu/cmsimde">https://github.com/mdecycu/cmsimde</a> as submodule</p>
-<p><a href="https://github.com/mdecp2022/site-41123139">github倉儲</a></p><h1>HW</h1>
+<p><a href="https://github.com/mdecp2022/site-41123139">github倉儲</a></p>
+<h1>HW</h1>
+<h2>w5</h2>
+<p><a href="https://mdecp2022.github.io/site-41123139/content/cp2022.html?src=https://gist.githubusercontent.com/INbunB/1d1dd44829d9736e82b84b4801a37ad7/raw/f21a62ee059b22a8f91297caa046c272c6a121ff/w5">密碼亂數</a></p>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false"># 導入亂數模組
+import random
+# 導入字串模組
+import string
+# 利用 def 關鍵字定義函式
+# 函式的輸入變數可以設定初始值
+def password_generator(size=4, chars=string.ascii_lowercase + string.digits):
+    # 函式內以多行註解說明函式功能
+    """Generate random password
+    """
+    # 利用 return 關鍵字將所產生的亂數字串傳回
+    return ''.join(random.choice(chars) for _ in range(size))
+# 建立一個變數與隨後的字串對應
+pass_string = "abcdefghkmnpqrstuwxyz123456789"
+cp_num = ["0747", "0761"]
+cad_num = ["0773", "0786"]
+def gen_acc_pass(course, course_num):
+    stud_list =[]
+    for num in course_num:
+        url = "https://nfu.cycu.org/?semester=1111&amp;courseno=" + num + "&amp;column=True"
+        class_list = open(url).read().split("\n")[:-1]
+        stud_list += class_list
+        #print(stud_list)
+    for stud_num in stud_list:
+        password = password_generator(4, pass_string)
+        #print(password)
+        account = course + stud_num
+        #print(account)
+        print(stud_num + "\t" + account + "\t" + password)
+gen_acc_pass("cp", cp_num)
+gen_acc_pass("cad", cad_num)</pre>
+<p><br/><br/><br/></p>
 <h2>w6</h2>
 <p><a href="https://mdecp2022.github.io/site-41123139/content/Brython.html?src=https://gist.githubusercontent.com/INbunB/eefcc6cfd6b9a27d76784b11170a3cc0/raw/d893bad9de7cb6d5d13851f66d51dfaa48153b5b/hw">hw</a> (點擊連結可抽點1a學號)</p>
 <pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false"># Python 的註解分為單行註解與多行, 單行註解可在字串前方放入 #
@@ -29,8 +64,52 @@ num = 5
 # 利用 for 重複迴圈與 range() 變數, 列印出 (利用 print() 函式) 已經隨機排列次序的 stud 數列的最前面 num 個學號值
 for i in range(num):
     print(stud[i])</pre>
-<p></p>
-<h2>w12</h2>
+<h2>w10</h2>
+<p><a href="https://mdecp2022.github.io/site-41123139/content/cp2022.html?src=https://gist.githubusercontent.com/INbunB/64b5b4166dbc666f228f608037c2950b/raw/bc078c7f4a9149317e3b957aedbc69128438af12/w10">w10缺考名單1a</a></p>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">import ast
+ 
+# get stud_list first
+ 
+def get_stud(c_name):
+    courses = {"1a": "0747", "1b": "0761", "2a": "0773", "2b": "0786"}
+    #c_name = "1a"
+    c = courses[c_name]
+    url = "https://nfu.cycu.org/?semester=1111&amp;courseno=" + c + "&amp;column=True"
+    data = open(url).read().split("\n")
+    stud = data[:-1]
+    return stud
+     
+cp_stud = get_stud("1a")
+ 
+# get w10 quiz result
+cp_w10_quiz_url = "https://gist.githubusercontent.com/mdecycu/9df4b372ac1b7386cf259ced15f1a2b2/raw/a6825f13b1bb0b61e09e74dd117729eefe1d947f/20221110_cp1b_w10_quiz.json"
+ 
+def get_score(url):
+    json_data = open(url).read()
+    big_dict = ast.literal_eval(json_data)
+    data = big_dict["body"]["testuser"]
+    quiz_dict = {}
+    for i in data:
+        stud_id = data[i]["user_name"]
+        stud_score = int(float(data[i]["total_score"]))
+        quiz_dict[stud_id] = stud_score
+    return quiz_dict
+     
+cp_quiz = get_score(cp_w10_quiz_url)
+cp_abs = []
+for stud in cp_stud:
+    try:
+        print(stud, cp_quiz[stud])
+    except:
+        # 缺考者沒有 quiz 成績
+        print(stud, "缺")
+        cp_abs.append(stud)
+# 列出缺考名單
+print("="*20)
+print("以下為 w10 缺考名單:")
+for stud in cp_abs:
+    print(stud)</pre>
+<p></p><h2>w12</h2>
 <p><a href="https://mdecp2022.github.io/site-41123139/content/Brython.html?src=https://gist.githubusercontent.com/INbunB/c773d6db6030bd09f10ac0a98cf92c9c/raw/937aec1b422451b6b2a420e67c0642d0b9f71eae/w12_hw-1.py">hw 第一個練習</a></p>
 <pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false"># Brython 的 input() 可以接受輸入提示字串, 跳出瀏覽器輸入表單後, 將輸入內容以字串取回
 user_input_temp = input("請輸入攝氏溫度值:")
@@ -366,7 +445,8 @@ grid(origx, origy, w, h, wnum, hnum, pixel=1, color="black")
 
 doc["power"].bind("click", launchAnimation)
 #browser.timer.set_interval(game, 100)
-</script><h1>cp2022</h1>
+</script>
+<h1>cp2022</h1>
 <p><a href="https://mdecp2022.github.io/site-41123139/content/Brython.html?src=https://gist.githubusercontent.com/INbunB/eefcc6cfd6b9a27d76784b11170a3cc0/raw/d893bad9de7cb6d5d13851f66d51dfaa48153b5b/hw&amp;src2=https://gist.githubusercontent.com/INbunB/eefcc6cfd6b9a27d76784b11170a3cc0/raw/2b68de24c458b2e30ec458cd5a32b6cb1d5b7910/hw2">w6_test1</a></p>
 <p><a href="https://en.wikipedia.org/wiki/Python_(programming_language)">https://en.wikipedia.org/wiki/Python_(programming_language)</a></p>
 <h4>Examples:</h4>
@@ -652,7 +732,8 @@ doc["threejsblock"].bind("click", threejsblock.do)
 <p><!-- Brython 程式執行的結果, 都以 brython_div1 作為切入位置 --></p>
 <div id="brython_div2"></div>
 <!-- editor2 結束 --><hr/>
-<script src="https://unpkg.com/three@0.144.0/build/three.js" type="text/javascript"></script><h1>Brython</h1>
+<script src="https://unpkg.com/three@0.144.0/build/three.js" type="text/javascript"></script>
+<h1>Brython</h1>
 <p><a href="https://en.wikipedia.org/wiki/Python_(programming_language)">https://en.wikipedia.org/wiki/Python_(programming_language)</a></p>
 <h4>Examples:</h4>
 <p style="padding-left: 30px;"><a href="https://gist.github.com/mdecycu/d9082d678096bd58378d6afe2c7fa05d">https://gist.github.com/mdecycu/d9082d678096bd58378d6afe2c7fa05d</a></p>

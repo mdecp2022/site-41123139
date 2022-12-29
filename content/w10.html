@@ -141,35 +141,52 @@ img.add_border {
           </div>
           
         </header>
-    <div id="tipue_search_content">w14 << <a href='w14.html'>Previous</a> <a href='15-2.html'>Next</a> >> 15-2<br /><h1>w15-1</h1>
-<p>1.為何學習計算機程式需要建立個人倉儲?<br/><br/> A:可以建立一個網站，隨時更新改版。<br/><br/>2.全球資訊網能夠提供甚麼功能或有什麼優點? <br/><br/> A:網頁主要是文字檔案格式化和超文件標示語言（HTML）。除了格式化文字之外，網頁還可能包含圖片、影片、聲音和軟體元件，這些元件會在使用者的網頁瀏覽器中呈現為多媒體內容的連貫頁面。 <br/><br/>3.Replit, stud.cycu.org 與 localhost 分別代表甚麼?<br/><br/> A: 1.localhost:只有在push的時候要上網。<br/>     2.Replit:別人開的伺服器，必須隨時上網。<br/>     3.stud.cycu.org:學校開的，必須隨時上網。</p>
-<p>4.https, ssh 到底提供使用者那些功能或優點?<br/><br/> A:1.HTTPS:是提供對網站伺服器的身分認證，保護交換資料的隱私與完整性。<br/>    2.ssh:會加密用戶端和伺服器之間的所有流量，以消除竊聽、連線攔截和其他攻擊。<br/><br/>5.Brython 與 Python 有甚麼差別?<br/><br/> A:1.Brython:使用C語言<br/>    2.Python:使用C++<br/><br/>6.能夠直接在瀏覽器中以 Brython 繪製中華民國國旗, 或模擬綠色方塊在方塊格點中任意移動, 代表甚麼?<br/><br/> A:代表寫程式很厲害。   <br/><br/>7.變數, 字串, 整數, 浮點數, 數列, Tuple, Dictionary, 函式, 重複迴圈, class, 物件導向, 資料庫, 這些名詞對您而言代表甚麼?</p>
-<p><br/><br/> A:比英文還複雜的英文。</p>
-<p>
-<script type="text/python">
-from browser import html, document
-# Brython 的 input() 可以接受輸入提示字串, 跳出瀏覽器輸入表單後, 將輸入內容以字串取回
-#user_input_temp = input("請輸入攝氏溫度值:")
-# 接著列出 user_input_temp 變數的資料型別
-# 但是在頁面中 Brython 的 print() 將會顯示在 log 而非頁面
-#print(type(user_input_temp))
-# 這裡定義一個 brython_div 變數, 透過 document[] 與頁面中 id="brython_div" 的位置對應
-brython_div = document["brython_div"]
-# 看能不能直接將變數值字串列在標註 id 為 "brython_div" 的頁面位置
-#brython_div <= user_input_temp
-# 之後若要列出 html, 則需要透過 Brython 的 html 模組
-# 接下來要設法按下按鈕之後才執行取使用者 input 的流程
-# 首先 comment 掉前面的 input() 與 print(), 同時蓋掉輸出, 並利用事件導向設計一個函式
-def get_input(env):
-    user_input_temp = input("請輸入攝氏溫度值:")
-    brython_div <= user_input_temp
-# 透過 Brython browser 模組中的 document 物件將 id="btn1" 的物件中的 bind() 方法
-# 讓使用者 click 後會經由瀏覽器中的 event 通知執行 get_input 函式
-document["btn1"].bind('click', get_input)
-</p>
-</script>
-</p>
-<br />w14 << <a href='w14.html'>Previous</a> <a href='15-2.html'>Next</a> >> 15-2</div>
+    <div id="tipue_search_content">w6 << <a href='w6.html'>Previous</a> <a href='w12.html'>Next</a> >> w12<br /><h1>w10</h1>
+<p><a href="https://mdecp2022.github.io/site-41123139/content/cp2022.html?src=https://gist.githubusercontent.com/INbunB/64b5b4166dbc666f228f608037c2950b/raw/bc078c7f4a9149317e3b957aedbc69128438af12/w10">w10缺考名單1a</a></p>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">import ast
+ 
+# get stud_list first
+ 
+def get_stud(c_name):
+    courses = {"1a": "0747", "1b": "0761", "2a": "0773", "2b": "0786"}
+    #c_name = "1a"
+    c = courses[c_name]
+    url = "https://nfu.cycu.org/?semester=1111&amp;courseno=" + c + "&amp;column=True"
+    data = open(url).read().split("\n")
+    stud = data[:-1]
+    return stud
+     
+cp_stud = get_stud("1a")
+ 
+# get w10 quiz result
+cp_w10_quiz_url = "https://gist.githubusercontent.com/mdecycu/9df4b372ac1b7386cf259ced15f1a2b2/raw/a6825f13b1bb0b61e09e74dd117729eefe1d947f/20221110_cp1b_w10_quiz.json"
+ 
+def get_score(url):
+    json_data = open(url).read()
+    big_dict = ast.literal_eval(json_data)
+    data = big_dict["body"]["testuser"]
+    quiz_dict = {}
+    for i in data:
+        stud_id = data[i]["user_name"]
+        stud_score = int(float(data[i]["total_score"]))
+        quiz_dict[stud_id] = stud_score
+    return quiz_dict
+     
+cp_quiz = get_score(cp_w10_quiz_url)
+cp_abs = []
+for stud in cp_stud:
+    try:
+        print(stud, cp_quiz[stud])
+    except:
+        # 缺考者沒有 quiz 成績
+        print(stud, "缺")
+        cp_abs.append(stud)
+# 列出缺考名單
+print("="*20)
+print("以下為 w10 缺考名單:")
+for stud in cp_abs:
+    print(stud)</pre>
+<p></p><br />w6 << <a href='w6.html'>Previous</a> <a href='w12.html'>Next</a> >> w12</div>
         
     <!-- footer -->
       <div class="container">
