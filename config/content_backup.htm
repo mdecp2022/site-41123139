@@ -65,7 +65,52 @@ num = 5
 for i in range(num):
     print(stud[i])</pre>
 <h2>w10</h2>
-<p><a href="https://mdecp2022.github.io/site-41123139/content/cp2022.html?src=https://gist.githubusercontent.com/INbunB/64b5b4166dbc666f228f608037c2950b/raw/bc078c7f4a9149317e3b957aedbc69128438af12/w10">w10缺考名單1a</a></p><h2>w12</h2>
+<p><a href="https://mdecp2022.github.io/site-41123139/content/cp2022.html?src=https://gist.githubusercontent.com/INbunB/64b5b4166dbc666f228f608037c2950b/raw/bc078c7f4a9149317e3b957aedbc69128438af12/w10">w10缺考名單1a</a></p>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">import ast
+ 
+# get stud_list first
+ 
+def get_stud(c_name):
+    courses = {"1a": "0747", "1b": "0761", "2a": "0773", "2b": "0786"}
+    #c_name = "1a"
+    c = courses[c_name]
+    url = "https://nfu.cycu.org/?semester=1111&amp;courseno=" + c + "&amp;column=True"
+    data = open(url).read().split("\n")
+    stud = data[:-1]
+    return stud
+     
+cp_stud = get_stud("1a")
+ 
+# get w10 quiz result
+cp_w10_quiz_url = "https://gist.githubusercontent.com/mdecycu/9df4b372ac1b7386cf259ced15f1a2b2/raw/a6825f13b1bb0b61e09e74dd117729eefe1d947f/20221110_cp1b_w10_quiz.json"
+ 
+def get_score(url):
+    json_data = open(url).read()
+    big_dict = ast.literal_eval(json_data)
+    data = big_dict["body"]["testuser"]
+    quiz_dict = {}
+    for i in data:
+        stud_id = data[i]["user_name"]
+        stud_score = int(float(data[i]["total_score"]))
+        quiz_dict[stud_id] = stud_score
+    return quiz_dict
+     
+cp_quiz = get_score(cp_w10_quiz_url)
+cp_abs = []
+for stud in cp_stud:
+    try:
+        print(stud, cp_quiz[stud])
+    except:
+        # 缺考者沒有 quiz 成績
+        print(stud, "缺")
+        cp_abs.append(stud)
+# 列出缺考名單
+print("="*20)
+print("以下為 w10 缺考名單:")
+for stud in cp_abs:
+    print(stud)</pre>
+<h2>w11</h2>
+<p><a href="https://mdecp2022.github.io/site-41123139/content/cp2022.html?src=https://gist.githubusercontent.com/INbunB/beb2c4d4e9a076ee8e38420d6d30faca/raw/ec1566f06a7d4a51a7c6c1bd37f88c8575f88b63/w11">繪畫方格15x15</a></p><h2>w12</h2>
 <p><a href="https://mdecp2022.github.io/site-41123139/content/Brython.html?src=https://gist.githubusercontent.com/INbunB/c773d6db6030bd09f10ac0a98cf92c9c/raw/937aec1b422451b6b2a420e67c0642d0b9f71eae/w12_hw-1.py">hw 第一個練習</a></p>
 <pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false"># Brython 的 input() 可以接受輸入提示字串, 跳出瀏覽器輸入表單後, 將輸入內容以字串取回
 user_input_temp = input("請輸入攝氏溫度值:")
