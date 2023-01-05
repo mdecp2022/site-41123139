@@ -310,6 +310,18 @@ end = 10
 for i in range(start,end+1,1):
     sum = sum + i 
 print("由"+str(start)+"加到"+str(end)+"等於"+str(sum))</pre>
+<p>1加到10和1加到100使用函數</p>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">def sumto(start,end):    
+    sum = 0
+    #start = 1
+    #end = 10
+    for i in range(start,end+1,1):
+        sum = sum + i 
+    print("由"+str(start)+"加到"+str(end)+"等於"+str(sum))
+    
+    
+sumto(1,10)
+sumto(1,100)</pre>
 <p></p>
 <!-- 加入啟動按鈕後的 Rect 行走程式原始碼 -->
 <script type="text/python">
